@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class LogAnalyzer {
 
    // Regex to parse a standard Apache combined log format line
-   private static final String LOG_REGEX = "^(\\S+) (\\S+) (\\S+) \\[([\\w:/]+\\s[+\\-]\\d{4})\\] \"(\\S+) (\\S+) (\\S+)\" (\\d{3}) (\\d+)";
+   private static final String LOG_REGEX = "^(\\S+) (\\S+) (\\S+) \\[([\\w:/]+\\s[+\\-]\\d{4})\\] \"(\\S+) (\\S+) (\\S+)\" (\\d{3}) (\\d+|-)";
    private static final Pattern PATTERN = Pattern.compile(LOG_REGEX);
 
    public static void main(String[] args) {
@@ -36,13 +36,15 @@ public class LogAnalyzer {
       Dataset<LogRecord> parsedLogs = rawLogs.map((MapFunction<String, LogRecord>) line -> {
          Matcher matcher = PATTERN.matcher(line);
          if (matcher.find()) {
+            String sizeStr = matcher.group(9);
+            long responseSize = "-".equals(sizeStr) ? 0L : Long.parseLong(sizeStr);
             return new LogRecord(
                   matcher.group(1), // IP Address
                   matcher.group(4), // Timestamp
                   matcher.group(5), // Method
                   matcher.group(6), // URL
                   Integer.parseInt(matcher.group(8)), // Status Code
-                  Long.parseLong(matcher.group(9)) // Response Size
+                  responseSize // Response Size
             );
          }
          return null; // Return null for lines that don't match
