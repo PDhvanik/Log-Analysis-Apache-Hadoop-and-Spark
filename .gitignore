@@ -1,0 +1,47 @@
+## Build artifacts
+**/target/
+app/target/
+
+## IDE/editor files
+# IntelliJ IDEA
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# Eclipse
+.project
+.classpath
+.settings/
+
+# VS Code
+.vscode/
+
+## OS-specific files
+.DS_Store
+Thumbs.db
+
+## Logs and temp files
+*.log
+*.out
+*.tmp
+*.swp
+*.swo
+
+## Java crash logs
+hs_err_pid*
+replay_pid*
+
+## Environment files
+.env
+*.env
+!hadoop.env
+
+## Docker-compose mounted data (keep directory, ignore contents)
+/data/*
+!/data/.gitkeep
+!/data/README.md
+
+## Local analysis outputs (covered by /data/* but listed for clarity)
+/data/log_analysis_output/
+/data/access.log
