@@ -1,0 +1,14 @@
+{
+  "name": "log-analyzer-project",
+  "version": "1.0.0",
+  "description": "Static server and visualization for Apache log analysis outputs",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

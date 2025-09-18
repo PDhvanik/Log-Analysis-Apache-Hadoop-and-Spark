@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Analysis Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>Log Analysis Dashboard</h1>
+            <p class="subtitle">Apache Web Server Log Analytics</p>
+        </header>
+
+        <div class="controls">
+            <button id="loadData" class="btn btn-primary">Load Analysis Data</button>
+            <button id="refreshData" class="btn btn-secondary">Refresh</button>
+            <div class="status" id="status">Ready to load data...</div>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Status Codes Analysis -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>HTTP Status Codes Distribution</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="statusChart"></canvas>
+                    <div class="stats" id="statusStats"></div>
+                </div>
+            </div>
+
+            <!-- Top IPs Analysis -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Top IP Addresses</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="ipChart"></canvas>
+                    <div class="ip-list" id="ipList"></div>
+                </div>
+            </div>
+
+            <!-- Top URLs Analysis -->
+            <div class="card">
+                <div class="card-header">
+                    <h3>Most Accessed URLs</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="urlChart"></canvas>
+                    <div class="url-list" id="urlList"></div>
+                </div>
+            </div>
+
+            <!-- Summary Statistics -->
+            <div class="card summary-card">
+                <div class="card-header">
+                    <h3>Summary Statistics</h3>
+                </div>
+                <div class="card-body">
+                    <div class="summary-grid">
+                        <div class="summary-item">
+                            <div class="summary-value" id="totalRequests">-</div>
+                            <div class="summary-label">Total Requests</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-value" id="uniqueIPs">-</div>
+                            <div class="summary-label">Unique IPs</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-value" id="uniqueURLs">-</div>
+                            <div class="summary-label">Unique URLs</div>
+                        </div>
+                        <div class="summary-item">
+                            <div class="summary-value" id="errorRate">-</div>
+                            <div class="summary-label">Error Rate</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="data-tables">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Detailed Data Tables</h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-tabs">
+                        <button class="tab-btn active" data-tab="status">Status Codes</button>
+                        <button class="tab-btn" data-tab="ips">Top IPs</button>
+                        <button class="tab-btn" data-tab="urls">Top URLs</button>
+                    </div>
+                    <div class="table-content">
+                        <div id="statusTable" class="table-panel active"></div>
+                        <div id="ipsTable" class="table-panel"></div>
+                        <div id="urlsTable" class="table-panel"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="data-loader.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>

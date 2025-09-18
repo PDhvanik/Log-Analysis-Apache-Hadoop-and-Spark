@@ -45,3 +45,6 @@ replay_pid*
 ## Local analysis outputs (covered by /data/* but listed for clarity)
 /data/log_analysis_output/
 /data/access.log
+
+
+node_modules
